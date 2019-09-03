@@ -17,7 +17,9 @@ import {
 import { Card, CardItem, Thumbnail } from "native-base";
 
 const educationLogo = require("./assets/education.png");
-export default function App() {
+export default class App extends React.Component {
+
+  render() {
   return (
     <Container>
       <Header>
@@ -106,4 +108,5 @@ export default function App() {
       </Content>
     </Container>
   );
+        }
 }
