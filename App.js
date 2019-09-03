@@ -1,19 +1,109 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import {
+  Container,
+  Header,
+  Title,
+  Content,
+  Footer,
+  FooterTab,
+  Button,
+  Left,
+  Right,
+  Body,
+  Icon,
+  Text,
+  Image
+} from "native-base";
+import { Card, CardItem, Thumbnail } from "native-base";
 
+const educationLogo = require("./assets/education.png");
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <Container>
+      <Header>
+        <Body>
+          <Title>Grace Consultancy</Title>
+        </Body>
+      </Header>
+      <Content padder>
+        <Card>
+          <CardItem>
+            <Left>
+              <Thumbnail source={educationLogo} />
+              <Body>
+                <Text>Education</Text>
+              </Body>
+            </Left>
+          </CardItem>
+        </Card>
+
+        <Card>
+          <CardItem>
+            <Left>
+              <Thumbnail source={educationLogo} />
+              <Body>
+                <Text>Migration</Text>
+              </Body>
+            </Left>
+          </CardItem>
+        </Card>
+
+        <Card>
+          <CardItem>
+            <Left>
+              <Thumbnail source={educationLogo} />
+              <Body>
+                <Text>PTE/IELTS</Text>
+              </Body>
+            </Left>
+          </CardItem>
+        </Card>
+
+        <Card>
+          <CardItem>
+            <Left>
+              <Thumbnail source={educationLogo} />
+              <Body>
+                <Text>Professional Year</Text>
+              </Body>
+            </Left>
+          </CardItem>
+        </Card>
+
+        <Card>
+          <CardItem>
+            <Left>
+              <Thumbnail source={educationLogo} />
+              <Body>
+                <Text>Visa Options</Text>
+              </Body>
+            </Left>
+          </CardItem>
+        </Card>
+
+        <Card>
+          <CardItem>
+            <Left>
+              <Thumbnail source={educationLogo} />
+              <Body>
+                <Text>Other Services</Text>
+              </Body>
+            </Left>
+          </CardItem>
+        </Card>
+
+        <Button
+          style={{
+            textAlign: "center",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 8
+          }}
+          primary
+        >
+          <Text style={{ fontWeight: "bold" }}> Book Appointment </Text>
+        </Button>
+      </Content>
+    </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
