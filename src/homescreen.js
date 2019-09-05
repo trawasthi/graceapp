@@ -12,10 +12,12 @@ import {
   CardItem,
   Thumbnail
 } from 'native-base';
-
 import educationLogo from '../assets/education.png';
 import migrationLogo from '../assets/migration.png';
 import studyLogo from '../assets/study.png';
+import professionalLogo from '../assets/professional.png';
+import visaLogo from '../assets/visa.png';
+import serviceLogo from '../assets/service.png';
 
 export default class Home extends React.Component {
   static navigationOptions = {
@@ -43,7 +45,7 @@ export default class Home extends React.Component {
           </Card>
 
           <Card>
-            <CardItem>
+            <CardItem button onPress={() => this.props.navigation.navigate('Migration')}>
               <Left>
                 <Thumbnail square source={migrationLogo} />
                 <Body>
@@ -67,7 +69,7 @@ export default class Home extends React.Component {
           <Card>
             <CardItem>
               <Left>
-                <Thumbnail source={educationLogo} />
+                <Thumbnail square source={professionalLogo} />
                 <Body>
                   <Text>Professional Year</Text>
                 </Body>
@@ -78,7 +80,7 @@ export default class Home extends React.Component {
           <Card>
             <CardItem>
               <Left>
-                <Thumbnail source={educationLogo} />
+                <Thumbnail square source={visaLogo} />
                 <Body>
                   <Text>Visa Options</Text>
                 </Body>
@@ -89,7 +91,7 @@ export default class Home extends React.Component {
           <Card>
             <CardItem>
               <Left>
-                <Thumbnail source={educationLogo} />
+                <Thumbnail square source={serviceLogo} />
                 <Body>
                   <Text>Other Services</Text>
                 </Body>
@@ -104,7 +106,24 @@ export default class Home extends React.Component {
               alignItems: 'center',
               marginTop: 8
             }}
-            primary>
+            primary
+            rounded
+            onPress={() =>
+              // eslint-disable-next-line no-alert
+              alert(
+                'Under Construction. Chill man. Work is going on.',
+                [
+                  { text: 'Ask me later', onPress: () => console.log('Ask me later pressed') },
+                  {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel'
+                  },
+                  { text: 'Ok.', onPress: () => console.log('OK Pressed') }
+                ],
+                { cancelable: false }
+              )
+            }>
             <Text style={{ fontWeight: 'bold' }}> Book Appointment </Text>
           </Button>
         </Content>

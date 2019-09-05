@@ -2,6 +2,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import Home from './src/homescreen';
 import Education from './src/education';
+import Migration from './src/migration';
 
 const RootStack = createStackNavigator({
   Home: {
@@ -9,6 +10,9 @@ const RootStack = createStackNavigator({
   },
   Education: {
     screen: Education
+  },
+  Migration: {
+    screen: Migration
   }
 });
 
