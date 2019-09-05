@@ -1,8 +1,6 @@
 import React from 'react';
 import {
   Container,
-  Header,
-  Title,
   Content,
   Button,
   Left,
@@ -10,28 +8,41 @@ import {
   Text,
   Card,
   CardItem,
-  Thumbnail
+  Thumbnail,
+  Icon
 } from 'native-base';
 import educationLogo from '../assets/education.png';
 import migrationLogo from '../assets/migration.png';
 import studyLogo from '../assets/study.png';
 import professionalLogo from '../assets/professional.png';
 import visaLogo from '../assets/visa.png';
-import serviceLogo from '../assets/service.png';
 
 export default class Home extends React.Component {
-  static navigationOptions = {
-    header: null
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Grace Consultancy',
+      headerStyle: {
+        backgroundColor: '#f44336'
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold'
+      },
+      headerLeft: (
+        <Icon
+          name="menu"
+          size={30}
+          style={{ marginStart: 10 }}
+          backgroundColor="#000000"
+          onPress={() => navigation.openDrawer()}
+        />
+      )
+    };
   };
 
   render() {
     return (
       <Container>
-        <Header>
-          <Body>
-            <Title>Grace Consultancy</Title>
-          </Body>
-        </Header>
         <Content padder>
           <Card>
             <CardItem button onPress={() => this.props.navigation.navigate('Education')}>
@@ -88,7 +99,7 @@ export default class Home extends React.Component {
             </CardItem>
           </Card>
 
-          <Card>
+          {/* <Card>
             <CardItem>
               <Left>
                 <Thumbnail square source={serviceLogo} />
@@ -97,21 +108,22 @@ export default class Home extends React.Component {
                 </Body>
               </Left>
             </CardItem>
-          </Card>
+          </Card> */}
 
           <Button
             style={{
               textAlign: 'center',
               justifyContent: 'center',
               alignItems: 'center',
-              marginTop: 8
+              marginTop: 8,
+              backgroundColor: '#2196f3'
             }}
             primary
             rounded
             onPress={() =>
               // eslint-disable-next-line no-alert
               alert(
-                'Under Construction. Chill man. Work is going on.',
+                'Under Construction. Work in progress...',
                 [
                   { text: 'Ask me later', onPress: () => console.log('Ask me later pressed') },
                   {
