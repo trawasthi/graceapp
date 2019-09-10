@@ -1,4 +1,4 @@
-import { createAppContainer, SafeAreaView } from 'react-navigation';
+import { createAppContainer, SafeAreaView, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator, DrawerNavigatorItems } from 'react-navigation-drawer';
 
@@ -11,6 +11,9 @@ import Migration from './src/migration';
 import Gallery from './src/gallery';
 import Links from './src/links';
 import Logo from './assets/logo.png';
+import AuthLoadingScreen from './src/authloading';
+import SignInScreen from './src/signin';
+import RegisterScreen from './src/register';
 
 const RootStack = createStackNavigator(
   {
@@ -66,6 +69,31 @@ const drawerNavigator = createDrawerNavigator(
   }
 );
 
-const App = createAppContainer(drawerNavigator);
+const AuthStack = createStackNavigator(
+  {
+    SignIn: {
+      screen: SignInScreen
+    },
+    Register: {
+      screen: RegisterScreen
+    }
+  },
+  {
+    mode: 'modal'
+  }
+);
+
+const App = createAppContainer(
+  createSwitchNavigator(
+    {
+      AuthLoading: AuthLoadingScreen,
+      App: drawerNavigator,
+      Auth: AuthStack
+    },
+    {
+      initialRouteName: 'AuthLoading'
+    }
+  )
+);
 
 export default App;
