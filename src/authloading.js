@@ -1,5 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, AsyncStorage, StatusBar, View } from 'react-native';
+import { FirebaseContext } from './firebase/firebase';
 
 AsyncStorage.clear();
 
@@ -27,10 +28,21 @@ export default class AuthLoadingScreen extends React.Component {
   // Render any loading content that you like here
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center' }}>
-        <ActivityIndicator size="large" />
-        <StatusBar barStyle="default" />
-      </View>
+      <FirebaseContext.Consumer>
+        {firebase => {
+          console.log('firebase', firebase);
+          firebase.doCreateUserWithEmailAndPassword('abh@gmail.com', 'test123');
+          firebase.auth.onAuthStateChanged(user => {
+            console.log('user', user);
+          });
+          return (
+            <View style={{ flex: 1, justifyContent: 'center' }}>
+              <ActivityIndicator size="large" />
+              <StatusBar barStyle="default" />
+            </View>
+          );
+        }}
+      </FirebaseContext.Consumer>
     );
   }
 }
