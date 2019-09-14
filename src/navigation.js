@@ -1,7 +1,7 @@
 import { createAppContainer, SafeAreaView, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator, DrawerNavigatorItems } from 'react-navigation-drawer';
-import { Icon, View, Text, Button } from 'native-base';
+import { Icon, View, Text } from 'native-base';
 import React from 'react';
 import { Alert, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -94,7 +94,7 @@ const drawerNavigator = createDrawerNavigator(
                 }>
                 <View style={styles.item}>
                   <View style={styles.iconContainer}>
-                    <Icon name="home" style={styles.icon} />
+                    <Icon name="ios-log-out" />
                   </View>
                   <Text style={styles.label}>Logout</Text>
                 </View>
@@ -121,17 +121,15 @@ const AuthStack = createStackNavigator(
   }
 );
 
-export default createAppContainer(
-  createSwitchNavigator(
-    {
-      AuthLoading: AuthLoadingScreen,
-      App: drawerNavigator,
-      Auth: AuthStack
-    },
-    {
-      initialRouteName: 'AuthLoading'
-    }
-  )
+const switchNavigator = createSwitchNavigator(
+  {
+    AuthLoading: AuthLoadingScreen,
+    App: drawerNavigator,
+    Auth: AuthStack
+  },
+  {
+    initialRouteName: 'AuthLoading'
+  }
 );
 
 const styles = StyleSheet.create({
@@ -149,9 +147,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     width: 24,
     alignItems: 'center'
-  },
-  icon: {
-    width: 24,
-    height: 24
   }
 });
+
+export default createAppContainer(switchNavigator);

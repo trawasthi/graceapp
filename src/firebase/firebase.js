@@ -17,10 +17,6 @@ export default class Firebase {
     app.initializeApp(firebaseConfig);
     this.auth = app.auth();
   }
-
-  doCreateUserWithEmailAndPassword = (email, password) => {
-    this.auth.createUserWithEmailAndPassword(email, password);
-  };
 }
 
 const FirebaseContext = React.createContext(null);

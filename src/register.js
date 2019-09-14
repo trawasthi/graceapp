@@ -1,10 +1,19 @@
 import React from 'react';
-import { AsyncStorage, StyleSheet } from 'react-native';
-import { Input, Item, Container, Button, Text, Thumbnail } from 'native-base';
-import logo from '../assets/logo.png';
+import { StyleSheet, ActivityIndicator } from 'react-native';
+import { Input, Item, Container, Button, Text } from 'native-base';
+import { withFirebase } from './firebase/firebase';
 
-export default class RegisterScreen extends React.Component {
-  state = { email: '', password: '', errorMessage: null };
+class RegisterScreen extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      email: '',
+      password: '',
+      confirmPassword: '',
+      isLoading: false,
+      errorMessage: null
+    };
+  }
 
   render() {
     return (
@@ -35,13 +44,13 @@ export default class RegisterScreen extends React.Component {
             secureTextEntry
             placeholder="Confirm Password"
             autoCapitalize="none"
-            onChangeText={password => this.setState({ password })}
-            value={this.state.password}
+            onChangeText={confirmPassword => this.setState({ confirmPassword })}
+            value={this.state.confirmPassword}
           />
         </Item>
 
         <Button
-          onPress={this._signInAsync}
+          onPress={this.signUp}
           primary
           style={{
             justifyContent: 'center',
@@ -51,20 +60,45 @@ export default class RegisterScreen extends React.Component {
           }}>
           <Text style={{ fontWeight: 'bold' }}> Sign Up </Text>
         </Button>
+        {this.state.isLoading && <ActivityIndicator size="large" />}
       </Container>
     );
   }
 
-  _signInAsync = async () => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('App');
+  signUp = () => {
+    if (this.state.email === '') {
+      this.setState({ errorMessage: 'Please enter email id' });
+      return;
+    }
+    if (this.state.password === '') {
+      this.setState({ errorMessage: 'Please enter password' });
+      return;
+    }
+
+    if (this.state.password !== this.state.confirmPassword) {
+      this.setState({ errorMessage: 'Password does not match' });
+      return;
+    }
+
+    this.setState({ isLoading: true });
+    this.props.firebase.auth
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(user => {
+        console.log('New User', user);
+        this.setState({ isLoading: false });
+        this.props.navigation.navigate('App');
+      })
+      .catch(error => {
+        this.setState({ isLoading: false, errorMessage: error.code });
+      });
   };
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
     alignItems: 'center'
   }
 });
+
+export default withFirebase(RegisterScreen);
