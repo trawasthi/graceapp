@@ -1,14 +1,14 @@
 import React from 'react';
-import { AsyncStorage, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Input, Item, Container, Button, Text, Thumbnail } from 'native-base';
 import logo from '../assets/logo.png';
+import { withFirebase } from './firebase/firebase';
 
-export default class SignInScreen extends React.Component {
-  static navigationOptions = {
-    header: null
-  };
-
-  state = { email: '', password: '', errorMessage: null };
+class SignIn extends React.Component {
+  constructor() {
+    super();
+    this.state = { email: '', password: '', errorMessage: null };
+  }
 
   render() {
     return (
@@ -36,7 +36,7 @@ export default class SignInScreen extends React.Component {
         </Item>
         <Button
           title="Login"
-          onPress={this._signInAsync}
+          onPress={this.loginIn}
           primary
           style={{
             justifyContent: 'center',
@@ -53,9 +53,15 @@ export default class SignInScreen extends React.Component {
     );
   }
 
-  _signInAsync = async () => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('App');
+  loginIn = () => {
+    this.props.firebase.auth
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(() => {
+        this.props.navigation.navigate('App');
+      })
+      .catch(error => {
+        this.setState({ errorMessage: error.code });
+      });
   };
 }
 
@@ -66,3 +72,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+const SignInScreen = withFirebase(SignIn);
+SignInScreen.navigationOptions = { header: null };
+export default SignInScreen;
