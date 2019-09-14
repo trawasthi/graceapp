@@ -1,7 +1,7 @@
 import { createAppContainer, SafeAreaView, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator, DrawerNavigatorItems } from 'react-navigation-drawer';
-import { Icon, View, Text } from 'native-base';
+import { Icon, View, Text, Thumbnail } from 'native-base';
 import React from 'react';
 import { Alert, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -14,6 +14,7 @@ import AuthLoadingScreen from './authloading';
 import SignInScreen from './signin';
 import RegisterScreen from './register';
 import { FirebaseContext } from './firebase/firebase';
+import logo from '../assets/logo.png';
 
 const RootStack = createStackNavigator(
   {
@@ -34,7 +35,7 @@ const RootStack = createStackNavigator(
   }
 );
 
-const drawerNavigator = createDrawerNavigator(
+const DrawerNavigator = createDrawerNavigator(
   {
     Home: {
       screen: RootStack
@@ -58,10 +59,7 @@ const drawerNavigator = createDrawerNavigator(
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-          {/* <Content>
-            <Image source={Logo} style={{ height: 200, width: null, flex: 1 }} />
-          </Content> */}
-          <Text style={{ fontSize: 32 }}>LOGO</Text>
+          <Thumbnail square source={logo} style={{ width: 194, height: 71 }} />
         </View>
         <DrawerNavigatorItems {...props} />
 
@@ -121,10 +119,10 @@ const AuthStack = createStackNavigator(
   }
 );
 
-const switchNavigator = createSwitchNavigator(
+const SwitchNavigator = createSwitchNavigator(
   {
     AuthLoading: AuthLoadingScreen,
-    App: drawerNavigator,
+    App: DrawerNavigator,
     Auth: AuthStack
   },
   {
@@ -150,4 +148,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default createAppContainer(switchNavigator);
+const AppContainer = createAppContainer(SwitchNavigator);
+export default AppContainer;

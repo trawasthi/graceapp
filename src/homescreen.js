@@ -16,30 +16,9 @@ import migrationLogo from '../assets/migration.png';
 import studyLogo from '../assets/study.png';
 import professionalLogo from '../assets/professional.png';
 import visaLogo from '../assets/visa.png';
+import { withFirebase } from './firebase/firebase';
 
-export default class Home extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: 'Grace Consultancy',
-      headerStyle: {
-        backgroundColor: '#f44336'
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold'
-      },
-      headerLeft: (
-        <Icon
-          name="menu"
-          size={30}
-          style={{ marginStart: 10 }}
-          backgroundColor="#000000"
-          onPress={() => navigation.openDrawer()}
-        />
-      )
-    };
-  };
-
+class HomeScreen extends React.Component {
   render() {
     return (
       <Container>
@@ -120,22 +99,28 @@ export default class Home extends React.Component {
             }}
             primary
             rounded
-            onPress={() =>
+            onPress={() => {
               // eslint-disable-next-line no-alert
-              alert(
-                'Under Construction. Work in progress...',
-                [
-                  { text: 'Ask me later', onPress: () => console.log('Ask me later pressed') },
+              this.props.firebase.db
+                .ref('adm/users/qwe')
+                .set([
                   {
-                    text: 'Cancel',
-                    onPress: () => console.log('Cancel Pressed'),
-                    style: 'cancel'
+                    username: 'Abhinav Gajurel',
+                    email: 'abh@gmail.com'
                   },
-                  { text: 'Ok.', onPress: () => console.log('OK Pressed') }
-                ],
-                { cancelable: false }
-              )
-            }>
+                  {
+                    username: 'John Stones',
+                    email: 'john@gmail.com'
+                  },
+                  {
+                    username: 'Sam Birf',
+                    email: 'sam@gmail.com'
+                  }
+                ])
+                .catch(error => {
+                  alert(error.code);
+                });
+            }}>
             <Text style={{ fontWeight: 'bold' }}> Book Appointment </Text>
           </Button>
         </Content>
@@ -143,3 +128,28 @@ export default class Home extends React.Component {
     );
   }
 }
+
+const Home = withFirebase(HomeScreen);
+Home.navigationOptions = ({ navigation }) => {
+  return {
+    title: 'Grace Consultancy',
+    headerStyle: {
+      backgroundColor: '#f44336'
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    },
+    headerLeft: (
+      <Icon
+        name="menu"
+        size={30}
+        style={{ marginStart: 10 }}
+        backgroundColor="#000000"
+        onPress={() => navigation.openDrawer()}
+      />
+    )
+  };
+};
+
+export default Home;
