@@ -20,7 +20,6 @@ export default class Links extends Component {
                   style={{ marginStart: 10 }}
                   backgroundColor="#000000"
                   onPress={() => this.props.navigation.openDrawer()}>
-                  {' '}
                   Links
                 </Icon>
               </Body>

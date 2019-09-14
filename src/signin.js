@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ActivityIndicator } from 'react-native';
 import { Input, Item, Container, Button, Text, Thumbnail } from 'native-base';
 import logo from '../assets/logo.png';
 import { withFirebase } from './firebase/firebase';
@@ -7,7 +7,7 @@ import { withFirebase } from './firebase/firebase';
 class SignIn extends React.Component {
   constructor() {
     super();
-    this.state = { email: '', password: '', errorMessage: null };
+    this.state = { email: '', password: '', errorMessage: null, isLoading: false };
   }
 
   render() {
@@ -49,18 +49,22 @@ class SignIn extends React.Component {
         <Button transparent onPress={() => this.props.navigation.navigate('Register')}>
           <Text style={{ color: '#2196f3' }}> Create an account </Text>
         </Button>
+        {this.state.isLoading && <ActivityIndicator size="large" />}
       </Container>
     );
   }
 
   loginIn = () => {
+    this.setState({ isLoading: true });
     this.props.firebase.auth
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
+        this.setState({ isLoading: false });
         this.props.navigation.navigate('App');
       })
       .catch(error => {
         this.setState({ errorMessage: error.code });
+        this.setState({ isLoading: false });
       });
   };
 }

@@ -1,8 +1,10 @@
 import { createAppContainer, SafeAreaView, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator, DrawerNavigatorItems } from 'react-navigation-drawer';
-import { Icon, View, Text } from 'native-base';
+import { Icon, View, Text, Button } from 'native-base';
 import React from 'react';
+import { Alert, StyleSheet } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import Home from './homescreen';
 import Education from './education';
 import Migration from './migration';
@@ -11,6 +13,7 @@ import Links from './links';
 import AuthLoadingScreen from './authloading';
 import SignInScreen from './signin';
 import RegisterScreen from './register';
+import { FirebaseContext } from './firebase/firebase';
 
 const RootStack = createStackNavigator(
   {
@@ -61,6 +64,44 @@ const drawerNavigator = createDrawerNavigator(
           <Text style={{ fontSize: 32 }}>LOGO</Text>
         </View>
         <DrawerNavigatorItems {...props} />
+
+        <FirebaseContext.Consumer>
+          {firebase => {
+            return (
+              <TouchableOpacity
+                onPress={() =>
+                  Alert.alert(
+                    'Log out',
+                    'Do you want to logout?',
+                    [
+                      {
+                        text: 'Cancel',
+                        onPress: () => {
+                          return null;
+                        }
+                      },
+                      {
+                        text: 'Confirm',
+                        onPress: () => {
+                          firebase.auth.signOut().then(() => {
+                            props.navigation.navigate('Auth');
+                          });
+                        }
+                      }
+                    ],
+                    { cancelable: false }
+                  )
+                }>
+                <View style={styles.item}>
+                  <View style={styles.iconContainer}>
+                    <Icon name="home" style={styles.icon} />
+                  </View>
+                  <Text style={styles.label}>Logout</Text>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+        </FirebaseContext.Consumer>
       </SafeAreaView>
     )
   }
@@ -92,3 +133,25 @@ export default createAppContainer(
     }
   )
 );
+
+const styles = StyleSheet.create({
+  item: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  label: {
+    margin: 16,
+    fontWeight: 'bold',
+    color: 'rgba(0, 0, 0, .87)',
+    fontSize: 14
+  },
+  iconContainer: {
+    marginHorizontal: 16,
+    width: 24,
+    alignItems: 'center'
+  },
+  icon: {
+    width: 24,
+    height: 24
+  }
+});
