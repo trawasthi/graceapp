@@ -15,6 +15,7 @@ import SignInScreen from './signin';
 import RegisterScreen from './register';
 import { FirebaseContext } from './firebase/firebase';
 import logo from '../assets/logo.png';
+import Booking from './booking';
 
 const RootStack = createStackNavigator(
   {
@@ -26,6 +27,9 @@ const RootStack = createStackNavigator(
     },
     Migration: {
       screen: Migration
+    },
+    Booking: {
+      screen: Booking
     }
   },
   {

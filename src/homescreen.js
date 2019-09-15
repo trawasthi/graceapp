@@ -100,26 +100,7 @@ class HomeScreen extends React.Component {
             primary
             rounded
             onPress={() => {
-              // eslint-disable-next-line no-alert
-              this.props.firebase.db
-                .ref('adm/users/qwe')
-                .set([
-                  {
-                    username: 'Abhinav Gajurel',
-                    email: 'abh@gmail.com'
-                  },
-                  {
-                    username: 'John Stones',
-                    email: 'john@gmail.com'
-                  },
-                  {
-                    username: 'Sam Birf',
-                    email: 'sam@gmail.com'
-                  }
-                ])
-                .catch(error => {
-                  alert(error.code);
-                });
+              this.props.navigation.navigate('Booking');
             }}>
             <Text style={{ fontWeight: 'bold' }}> Book Appointment </Text>
           </Button>
