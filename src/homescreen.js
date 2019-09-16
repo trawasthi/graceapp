@@ -12,7 +12,7 @@ import {
   Icon
 } from 'native-base';
 import educationLogo from '../assets/education.png';
-import migrationLogo from '../assets/migration.png';
+import migrationLogo from '../assets/migration.jpg';
 import studyLogo from '../assets/study.png';
 import professionalLogo from '../assets/professional.png';
 import visaLogo from '../assets/visa.png';
