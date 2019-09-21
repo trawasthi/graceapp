@@ -10,6 +10,27 @@ import otherLogo from '../assets/other.png';
 import { withFirebase } from './firebase/firebase';
 
 class HomeScreen extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      adminUser: false
+    };
+  }
+
+  componentDidMount() {
+    this.props.firebase.auth.onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          adminUser: true
+        });
+      } else {
+        this.setState({
+          adminUser: false
+        });
+      }
+    });
+  }
+
   render() {
     return (
       <Container style={[style.parent]}>
@@ -108,21 +129,40 @@ class HomeScreen extends React.Component {
             <Text>Other Services</Text>
           </CardItem>
         </Card>
-        <Button
-          style={{
-            textAlign: 'center',
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: '#2196f3',
-            marginLeft: 75
-          }}
-          primary
-          rounded
-          onPress={() => {
-            this.props.navigation.navigate('Booking');
-          }}>
-          <Text style={{ fontWeight: 'bold' }}> Book Appointment </Text>
-        </Button>
+
+        {this.state.adminUser ? (
+          <Button
+            style={{
+              textAlign: 'center',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: '#2196f3',
+              marginLeft: 75
+            }}
+            primary
+            rounded
+            onPress={() => {
+              this.props.navigation.navigate('ViewAppointment');
+            }}>
+            <Text style={{ fontWeight: 'bold' }}> View Appointment </Text>
+          </Button>
+        ) : (
+          <Button
+            style={{
+              textAlign: 'center',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: '#2196f3',
+              marginLeft: 75
+            }}
+            primary
+            rounded
+            onPress={() => {
+              this.props.navigation.navigate('Booking');
+            }}>
+            <Text style={{ fontWeight: 'bold' }}> Book Appointment </Text>
+          </Button>
+        )}
       </Container>
     );
   }

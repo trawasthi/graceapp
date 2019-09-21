@@ -16,6 +16,7 @@ import RegisterScreen from './register';
 import { FirebaseContext } from './firebase/firebase';
 import logo from '../assets/logo.png';
 import Booking from './booking';
+import ViewAppointment from './viewappointment';
 
 const RootStack = createStackNavigator(
   {
@@ -30,6 +31,9 @@ const RootStack = createStackNavigator(
     },
     Booking: {
       screen: Booking
+    },
+    ViewAppointment: {
+      screen: ViewAppointment
     }
   },
   {

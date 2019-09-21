@@ -14,7 +14,7 @@ class SignIn extends React.Component {
     return (
       <Container style={styles.container}>
         <Thumbnail square source={logo} style={{ width: 194, height: 71 }} />
-        <Text style={{ fontWeight: 'bold', color: '#2196f3', marginTop: 16 }}>Member login</Text>
+        <Text style={{ fontWeight: 'bold', color: '#2196f3', marginTop: 16 }}>Admin login</Text>
         {this.state.errorMessage && <Text style={{ color: 'red' }}>{this.state.errorMessage}</Text>}
         <Item style={{ width: 300 }}>
           <Input
@@ -46,8 +46,11 @@ class SignIn extends React.Component {
           }}>
           <Text style={{ fontWeight: 'bold' }}> Login </Text>
         </Button>
-        <Button transparent onPress={() => this.props.navigation.navigate('Register')}>
+        {/* <Button transparent onPress={() => this.props.navigation.navigate('Register')}>
           <Text style={{ color: '#2196f3' }}> Create an account </Text>
+        </Button> */}
+        <Button transparent onPress={() => this.props.navigation.navigate('App')}>
+          <Text style={{ color: '#2196f3' }}> Login as Guest </Text>
         </Button>
         {this.state.isLoading && <ActivityIndicator size="large" />}
       </Container>
