@@ -14,6 +14,7 @@ import {
 import { Alert } from 'react-native';
 import { withFirebase } from './firebase/firebase';
 
+// Main class for booking
 class BookingClass extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +30,7 @@ class BookingClass extends Component {
   }
 
   componentDidMount() {
+    // load all the available appointment during mount
     this.props.firebase.db
       .ref('/Available_Appointments')
       .once('value')
@@ -39,19 +41,23 @@ class BookingClass extends Component {
       });
   }
 
+  // set booking queries
   onQueriesChange = value => {
     this.setState({
       bookOpt: value
     });
   };
 
+  // set booking date/time
   onDateTimeChange = value => {
     this.setState({
       bookTime: value
     });
   };
 
+  // handle booking function
   onFormSubmit = () => {
+    // check if fullname is entered
     if (this.state.fullName === '') {
       Alert.alert('Invalid Input', 'Please enter your name', [
         {
@@ -63,7 +69,7 @@ class BookingClass extends Component {
       ]);
       return;
     }
-
+    // check if phone number is entered
     if (this.state.phoneNumber === '') {
       Alert.alert('Invalid Input', 'Please enter a valid phone number', [
         {
@@ -76,6 +82,7 @@ class BookingClass extends Component {
       return;
     }
 
+    // check if email is entered
     if (this.state.email === '') {
       Alert.alert('Invalid Input', 'Please enter a valid email', [
         {
@@ -88,6 +95,7 @@ class BookingClass extends Component {
       return;
     }
 
+    // check if address is entered
     if (this.state.address === '') {
       Alert.alert('Invalid Input', 'Please enter address', [
         {
@@ -100,6 +108,7 @@ class BookingClass extends Component {
       return;
     }
 
+    // check if booking query is entered
     if (this.state.bookOpt === '') {
       Alert.alert('Invalid Input', 'Please enter your booking query category', [
         {
@@ -112,6 +121,7 @@ class BookingClass extends Component {
       return;
     }
 
+    // check if booking time is entered
     if (this.state.bookTime === '') {
       Alert.alert('Invalid Input', 'Please enter appointment date and time', [
         {
@@ -124,6 +134,7 @@ class BookingClass extends Component {
     }
 
     // db operation
+    // add user booking info to database
     this.props.firebase.db.ref(`Booked_Appointments/${this.state.phoneNumber}`).set(
       {
         Name: this.state.fullName,
@@ -134,6 +145,7 @@ class BookingClass extends Component {
         BookingTime: this.state.bookTime
       },
       error => {
+        // error handling
         if (error) {
           Alert.alert('Faild', 'Failed to book appointment. Please try again later.', [
             {
@@ -158,6 +170,7 @@ class BookingClass extends Component {
               }
             });
 
+          // display success message
           Alert.alert('Done', 'You have booked an appointment.', [
             {
               text: 'Ok',
@@ -253,6 +266,7 @@ class BookingClass extends Component {
   }
 }
 
+// connect booking class to firebase functions
 const Booking = withFirebase(BookingClass);
 Booking.navigationOptions = {
   title: 'Booking'

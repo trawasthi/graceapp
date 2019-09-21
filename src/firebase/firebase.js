@@ -3,6 +3,7 @@ import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 
+// initialize firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyDpDk3ks3RBQBQrA629f810J1vC0AayO4M',
   authDomain: 'grace-5010b.firebaseapp.com',
@@ -13,6 +14,7 @@ const firebaseConfig = {
   appId: '1:173186058856:web:f661dcccc0f13b1186c9dd'
 };
 
+// main firebase class
 export default class Firebase {
   constructor() {
     app.initializeApp(firebaseConfig);
@@ -21,9 +23,11 @@ export default class Firebase {
   }
 }
 
+// create context to use firebase functions
 const FirebaseContext = React.createContext(null);
 export { FirebaseContext };
 
+// create firebase hoc to expose firebase function to other classes
 export const withFirebase = Component => props => (
   <FirebaseContext.Consumer>
     {firebase => <Component {...props} firebase={firebase} />}

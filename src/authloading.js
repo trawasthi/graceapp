@@ -4,6 +4,7 @@ import { withFirebase } from './firebase/firebase';
 
 class AuthLoadingScreen extends React.Component {
   componentDidMount() {
+    // navigate screen based on authentication
     this.props.firebase.auth.onAuthStateChanged(user => {
       this.props.navigation.navigate(user ? 'App' : 'Auth');
     });
@@ -20,4 +21,5 @@ class AuthLoadingScreen extends React.Component {
   }
 }
 
+// connect authloading screen to firebase functions
 export default withFirebase(AuthLoadingScreen);

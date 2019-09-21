@@ -1,17 +1,5 @@
 import React from 'react';
-import {
-  Container,
-  Content,
-  Button,
-  Left,
-  Body,
-  Text,
-  Card,
-  CardItem,
-  Thumbnail,
-  Icon,
-  Right
-} from 'native-base';
+import { Container, Button, Text, Card, CardItem, Thumbnail, Icon } from 'native-base';
 import { StyleSheet } from 'react-native';
 import educationLogo from '../assets/education.png';
 import migrationLogo from '../assets/migration.jpg';
@@ -154,6 +142,7 @@ const style = StyleSheet.create({
   }
 });
 
+// expose home component to firebase functions
 const Home = withFirebase(HomeScreen);
 Home.navigationOptions = ({ navigation }) => {
   return {
