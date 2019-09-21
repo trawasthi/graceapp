@@ -206,7 +206,11 @@ class BookingClass extends Component {
             </Item>
             <Item>
               <Label>Email</Label>
-              <Input onChangeText={email => this.setState({ email })} value={this.state.email} />
+              <Input
+                autoCapitalize="none"
+                onChangeText={email => this.setState({ email })}
+                value={this.state.email}
+              />
             </Item>
             <Item>
               <Label>Address</Label>
