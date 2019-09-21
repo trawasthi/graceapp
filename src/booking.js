@@ -23,8 +23,20 @@ class BookingClass extends Component {
       email: '',
       address: '',
       bookOpt: '',
-      bookTime: ''
+      bookTime: '',
+      availableTime: []
     };
+  }
+
+  componentDidMount() {
+    this.props.firebase.db
+      .ref('/Available_Appointments')
+      .once('value')
+      .then(snapshot => {
+        const data = snapshot.val();
+        const dataArray = Object.values(data);
+        this.setState({ availableTime: dataArray });
+      });
   }
 
   onQueriesChange = value => {
@@ -41,107 +53,122 @@ class BookingClass extends Component {
 
   onFormSubmit = () => {
     if (this.state.fullName === '') {
-      Alert.alert(
-        'Invalid Input',
-        'Please enter your name',
-        [
-          {
-            text: 'Ok',
-            onPress: () => {
-              return null;
-            }
+      Alert.alert('Invalid Input', 'Please enter your name', [
+        {
+          text: 'Ok',
+          onPress: () => {
+            return null;
           }
-        ],
-        { cancelable: false }
-      );
+        }
+      ]);
       return;
     }
 
     if (this.state.phoneNumber === '') {
-      Alert.alert(
-        'Invalid Input',
-        'Please enter a valid phone number',
-        [
-          {
-            text: 'Ok',
-            onPress: () => {
-              return null;
-            }
+      Alert.alert('Invalid Input', 'Please enter a valid phone number', [
+        {
+          text: 'Ok',
+          onPress: () => {
+            return null;
           }
-        ],
-        { cancelable: false }
-      );
+        }
+      ]);
       return;
     }
 
     if (this.state.email === '') {
-      Alert.alert(
-        'Invalid Input',
-        'Please enter a valid email',
-        [
-          {
-            text: 'Ok',
-            onPress: () => {
-              return null;
-            }
+      Alert.alert('Invalid Input', 'Please enter a valid email', [
+        {
+          text: 'Ok',
+          onPress: () => {
+            return null;
           }
-        ],
-        { cancelable: false }
-      );
+        }
+      ]);
       return;
     }
 
     if (this.state.address === '') {
-      Alert.alert(
-        'Invalid Input',
-        'Please enter address',
-        [
-          {
-            text: 'Ok',
-            onPress: () => {
-              return null;
-            }
+      Alert.alert('Invalid Input', 'Please enter address', [
+        {
+          text: 'Ok',
+          onPress: () => {
+            return null;
           }
-        ],
-        { cancelable: false }
-      );
+        }
+      ]);
       return;
     }
 
     if (this.state.bookOpt === '') {
-      Alert.alert(
-        'Invalid Input',
-        'Please enter your booking query category',
-        [
-          {
-            text: 'Ok',
-            onPress: () => {
-              return null;
-            }
+      Alert.alert('Invalid Input', 'Please enter your booking query category', [
+        {
+          text: 'Ok',
+          onPress: () => {
+            return null;
           }
-        ],
-        { cancelable: false }
-      );
+        }
+      ]);
       return;
     }
 
     if (this.state.bookTime === '') {
-      Alert.alert(
-        'Invalid Input',
-        'Please enter appointment date and time',
-        [
-          {
-            text: 'Ok',
-            onPress: () => {
-              return null;
-            }
+      Alert.alert('Invalid Input', 'Please enter appointment date and time', [
+        {
+          text: 'Ok',
+          onPress: () => {
+            return null;
           }
-        ],
-        { cancelable: false }
-      );
+        }
+      ]);
     }
 
     // db operation
+    this.props.firebase.db.ref(`Booked_Appointments/${this.state.phoneNumber}`).set(
+      {
+        Name: this.state.fullName,
+        Phone: this.state.phoneNumber,
+        Email: this.state.email,
+        Address: this.state.address,
+        BookingQuery: this.state.bookOpt,
+        BookingTime: this.state.bookTime
+      },
+      error => {
+        if (error) {
+          Alert.alert('Faild', 'Failed to book appointment. Please try again later.', [
+            {
+              text: 'Ok',
+              onPress: () => {
+                this.props.navigation.navigate('Home');
+              }
+            }
+          ]);
+        } else {
+          // remove selected appointment
+          this.props.firebase.db
+            .ref('/Available_Appointments')
+            .once('value')
+            .then(snapshot => {
+              const data = snapshot.val();
+              for (const val in data) {
+                if (data[val] === this.state.bookTime) {
+                  this.props.firebase.db.ref(`Available_Appointments/${val}`).remove();
+                  break;
+                }
+              }
+            });
+
+          Alert.alert('Done', 'You have booked an appointment.', [
+            {
+              text: 'Ok',
+              onPress: () => {
+                this.props.navigation.navigate('Home');
+              }
+            }
+          ]);
+        }
+      }
+    );
   };
 
   render() {
@@ -187,8 +214,8 @@ class BookingClass extends Component {
                 onValueChange={this.onQueriesChange}>
                 <Picker.Item label="Migration" value="Migration" />
                 <Picker.Item label="Study" value="Study" />
-                <Picker.Item label="PTE/IELTS" value="Pte" />
-                <Picker.Item label="Professional year" value="Py" />
+                <Picker.Item label="PTE/IELTS" value="PTE/IELTS" />
+                <Picker.Item label="Professional year" value="Professional year" />
               </Picker>
             </Item>
             <Item style={{ marginTop: 16, borderColor: 'transparent' }}>
@@ -197,14 +224,13 @@ class BookingClass extends Component {
             <Item>
               <Picker
                 mode="dropdown"
-                iosHeader="Queries"
+                iosHeader="Date/Time"
                 iosIcon={<Icon name="arrow-down" />}
                 selectedValue={this.state.bookTime}
                 onValueChange={this.onDateTimeChange}>
-                <Picker.Item label="21/09/2019 09:00" value="21/09/2019 09:00" />
-                <Picker.Item label="23/09/2019 10:00" value="23/09/2019 10:00" />
-                <Picker.Item label="23/09/2019 12:30" value="23/09/2019 12:30" />
-                <Picker.Item label="27/09/2019 15:00" value="27/09/2019 15:00" />
+                {this.state.availableTime.map((value, i) => (
+                  <Picker.Item key={i} label={value} value={value} />
+                ))}
               </Picker>
             </Item>
           </Form>
