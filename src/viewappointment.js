@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Content, Icon, Text, Header, List, ListItem, Left, Right } from 'native-base';
-import { Alert } from 'react-native';
+import { Container, Content, Icon, Text, List, ListItem, Left, Right } from 'native-base';
+import { ActivityIndicator } from 'react-native';
 import { withFirebase } from './firebase/firebase';
 
 // Main class for booking
@@ -8,7 +8,8 @@ class ViewAppointmentClass extends Component {
   constructor() {
     super();
     this.state = {
-      list: []
+      list: [],
+      isLoading: true
     };
   }
 
@@ -20,7 +21,7 @@ class ViewAppointmentClass extends Component {
       .then(snapshot => {
         const data = snapshot.val();
         const dataArray = Object.values(data);
-        this.setState({ list: dataArray });
+        this.setState({ list: dataArray, isLoading: false });
       });
   }
 
@@ -39,11 +40,12 @@ class ViewAppointmentClass extends Component {
                   <Text>{user.Name}</Text>
                 </Left>
                 <Right>
-                  <Icon name="arrow-forward" />
+                  {user.confirm ? <Icon name="md-checkmark" /> : <Icon name="arrow-forward" />}
                 </Right>
               </ListItem>
             ))}
           </List>
+          {this.state.isLoading && <ActivityIndicator size="large" />}
         </Content>
       </Container>
     );
