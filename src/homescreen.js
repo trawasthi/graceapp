@@ -129,24 +129,43 @@ class HomeScreen extends React.Component {
             <Text>Other Services</Text>
           </CardItem>
         </Card>
-
-        {this.state.adminUser ? (
-          <Button
-            style={{
-              textAlign: 'center',
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: '#2196f3',
-              marginLeft: 75
-            }}
-            primary
-            rounded
-            onPress={() => {
-              this.props.navigation.navigate('ViewAppointment');
-            }}>
-            <Text style={{ fontWeight: 'bold' }}> View Appointment </Text>
-          </Button>
-        ) : (
+        {this.state.adminUser && (
+          <>
+            <Card transparent style={[style.child]}>
+              <Button
+                style={{
+                  textAlign: 'center',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: '#2196f3'
+                }}
+                primary
+                rounded
+                onPress={() => {
+                  this.props.navigation.navigate('ViewAppointment');
+                }}>
+                <Text style={{ fontWeight: 'bold' }}> View Booking </Text>
+              </Button>
+            </Card>
+            <Card transparent style={[style.child]}>
+              <Button
+                style={{
+                  textAlign: 'center',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: '#2196f3'
+                }}
+                primary
+                rounded
+                onPress={() => {
+                  this.props.navigation.navigate('AddAppointment');
+                }}>
+                <Text style={{ fontWeight: 'bold' }}> Add Booking</Text>
+              </Button>
+            </Card>
+          </>
+        )}
+        {!this.state.adminUser && (
           <Button
             style={{
               textAlign: 'center',

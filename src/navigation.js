@@ -18,6 +18,7 @@ import logo from '../assets/logo.png';
 import Booking from './booking';
 import ViewAppointment from './viewappointment';
 import UserAppointment from './userappointment';
+import AddAppointment from './addappointment';
 
 const RootStack = createStackNavigator(
   {
@@ -35,6 +36,9 @@ const RootStack = createStackNavigator(
     },
     ViewAppointment: {
       screen: ViewAppointment
+    },
+    AddAppointment: {
+      screen: AddAppointment
     },
     UserAppointment: {
       screen: UserAppointment
