@@ -65,10 +65,7 @@ const DrawerNavigator = createDrawerNavigator(
   },
   {
     contentComponent: props => (
-      <SafeAreaView
-        style={{
-          backgroundColor: 'Red'
-        }}>
+      <SafeAreaView>
         <View
           style={{
             height: 100,

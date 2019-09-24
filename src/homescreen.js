@@ -207,7 +207,7 @@ Home.navigationOptions = ({ navigation }) => {
   return {
     title: 'Grace Consultancy',
     headerStyle: {
-      backgroundColor: '#2196f3'
+      backgroundColor: '#f44336'
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
