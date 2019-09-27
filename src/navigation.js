@@ -1,7 +1,7 @@
 import { createAppContainer, SafeAreaView, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator, DrawerNavigatorItems } from 'react-navigation-drawer';
-import { Icon, View, Text, Thumbnail } from 'native-base';
+import { Icon, View, Text, Thumbnail, Label } from 'native-base';
 import React from 'react';
 import { Alert, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -19,6 +19,8 @@ import Booking from './booking';
 import ViewAppointment from './viewappointment';
 import UserAppointment from './userappointment';
 import AddAppointment from './addappointment';
+import Points from './points';
+import Contact from './contact';
 
 const RootStack = createStackNavigator(
   {
@@ -61,6 +63,12 @@ const DrawerNavigator = createDrawerNavigator(
     },
     Links: {
       screen: Links
+    },
+    Points: {
+      screen: Points
+    },
+    Contact: {
+      screen: Contact
     }
   },
   {
@@ -113,6 +121,47 @@ const DrawerNavigator = createDrawerNavigator(
             );
           }}
         </FirebaseContext.Consumer>
+        <View
+          style={{
+            alignItems: 'center',
+            justifyContent: 'space-around',
+            flexDirection: 'row',
+            marginTop: 48
+          }}>
+          <Label style={{ fontWeight: 'bold' }}>Follow us</Label>
+        </View>
+        <View
+          style={{
+            alignItems: 'center',
+            justifyContent: 'space-around',
+            flexDirection: 'row',
+            marginTop: 16
+          }}>
+          <Icon
+            name="logo-facebook"
+            onPress={() => {
+              // Todo Link
+            }}
+          />
+          <Icon
+            name="logo-twitter"
+            onPress={() => {
+              // Todo Link
+            }}
+          />
+          <Icon
+            name="logo-linkedin"
+            onPress={() => {
+              // Todo Link
+            }}
+          />
+          <Icon
+            name="logo-youtube"
+            onPress={() => {
+              // Todo Link
+            }}
+          />
+        </View>
       </SafeAreaView>
     )
   }

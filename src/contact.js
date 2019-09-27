@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Container, Content, Card, CardItem, Body, Icon } from 'native-base';
 
-export default class Links extends Component {
+export default class Contact extends Component {
   static navigationOptions = {
-    drawerLabel: 'Useful links',
-    drawerIcon: () => <Icon name="link" />
+    drawerLabel: 'Contact us',
+    drawerIcon: () => <Icon name="md-contacts" />
   };
 
   render() {
@@ -20,7 +20,7 @@ export default class Links extends Component {
                   style={{ marginStart: 10 }}
                   backgroundColor="#000000"
                   onPress={() => this.props.navigation.openDrawer()}>
-                  Links
+                  PR point table
                 </Icon>
               </Body>
             </CardItem>
