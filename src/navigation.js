@@ -3,7 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator, DrawerNavigatorItems } from 'react-navigation-drawer';
 import { Icon, View, Text, Thumbnail, Label } from 'native-base';
 import React from 'react';
-import { Alert, StyleSheet } from 'react-native';
+import { Alert, StyleSheet, Linking } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Home from './homescreen';
 import Education from './education';
@@ -140,25 +140,25 @@ const DrawerNavigator = createDrawerNavigator(
           <Icon
             name="logo-facebook"
             onPress={() => {
-              // Todo Link
+              Linking.openURL('https://www.facebook.com/gracemigration/');
             }}
           />
           <Icon
             name="logo-twitter"
             onPress={() => {
-              // Todo Link
+              Linking.openURL('https://twitter.com/GraceMigration');
             }}
           />
           <Icon
             name="logo-linkedin"
             onPress={() => {
-              // Todo Link
+              Linking.openURL('https://www.linkedin.com/in/gracemigration');
             }}
           />
           <Icon
             name="logo-youtube"
             onPress={() => {
-              // Todo Link
+              Linking.openURL('https://www.youtube.com/channel/UCLuzQv45Cmwy5dTIMB_z7iQ');
             }}
           />
         </View>
