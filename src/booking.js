@@ -170,6 +170,18 @@ class BookingClass extends Component {
               }
             });
 
+          // send confirmation email
+          fetch(
+            `https://us-central1-grace-5010b.cloudfunctions.net/sendConfirmationEmail?email=${this.state.email}&name=${this.state.fullName}&time=${this.state.bookTime}`
+          )
+            .then(response => response.json())
+            .then(responseJson => {
+              console.log(responseJson);
+            })
+            .catch(error => {
+              console.error(error);
+            });
+
           // display success message
           Alert.alert('Done', 'You have booked an appointment.', [
             {
