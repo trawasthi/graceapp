@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Content, Icon, Text, List, ListItem, Left, Right } from 'native-base';
+import { Container, Content, Icon, Text, List, ListItem, Left, Right, Body } from 'native-base';
 import { ActivityIndicator } from 'react-native';
 import { withFirebase } from './firebase/firebase';
 
@@ -40,11 +40,12 @@ class ViewAppointmentClass extends Component {
                 onPress={() => {
                   this.props.navigation.navigate('UserAppointment', { user });
                 }}>
-                <Left>
+                <Body>
                   <Text>{user.Name}</Text>
-                </Left>
+                  <Text note>{user.BookingTime}</Text>
+                </Body>
                 <Right>
-                  {user.confirm ? <Icon name="md-checkmark" /> : <Icon name="arrow-forward" />}
+                  <Icon name="arrow-forward" />
                 </Right>
               </ListItem>
             ))}
