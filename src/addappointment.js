@@ -20,6 +20,7 @@ class AddAppointmentClass extends Component {
           }
         }
       ]);
+      return;
     }
 
     this.props.firebase.db

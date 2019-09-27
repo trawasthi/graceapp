@@ -14,15 +14,19 @@ class ViewAppointmentClass extends Component {
   }
 
   componentDidMount() {
-    // load all the booked appointments during mount
-    this.props.firebase.db
-      .ref('/Booked_Appointments')
-      .once('value')
-      .then(snapshot => {
-        const data = snapshot.val();
-        const dataArray = Object.values(data);
-        this.setState({ list: dataArray, isLoading: false });
-      });
+    this.props.firebase.db.ref('/Booked_Appointments').on('value', snapshot => {
+      const data = snapshot.val();
+      if (data === null) {
+        this.setState({ isLoading: false });
+        return;
+      }
+      const dataArray = Object.values(data);
+      this.setState({ list: dataArray, isLoading: false });
+    });
+  }
+
+  componentWillMount() {
+    this.props.firebase.db.ref('/Booked_Appointments').off('value');
   }
 
   render() {
