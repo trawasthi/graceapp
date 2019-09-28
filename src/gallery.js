@@ -73,7 +73,6 @@ export default class Gallery extends Component {
             <Card>
               <TouchableHighlight
                 onPress={() => {
-                  console.log('Press event');
                   this.setState({ index: 0, modalVisible: true });
                 }}>
                 <Image source={photo1} style={{ height: 200, width: null, flex: 1 }} />
@@ -85,7 +84,6 @@ export default class Gallery extends Component {
             <Card>
               <TouchableHighlight
                 onPress={() => {
-                  console.log('Press event');
                   this.setState({ index: 1, modalVisible: true });
                 }}>
                 <Image source={photo2} style={{ height: 200, width: null, flex: 1 }} />
@@ -98,7 +96,6 @@ export default class Gallery extends Component {
             <Card>
               <TouchableHighlight
                 onPress={() => {
-                  console.log('Press event');
                   this.setState({ index: 2, modalVisible: true });
                 }}>
                 <Image source={photo3} style={{ height: 200, width: null, flex: 1 }} />
@@ -111,7 +108,6 @@ export default class Gallery extends Component {
             <Card>
               <TouchableHighlight
                 onPress={() => {
-                  console.log('Press event');
                   this.setState({ index: 3, modalVisible: true });
                 }}>
                 <Image source={photo4} style={{ height: 200, width: null, flex: 1 }} />
