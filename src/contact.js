@@ -24,7 +24,7 @@ export default class Contact extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Header style={{ backgroundColor: '#009688' }}>
+        <Header style={{ backgroundColor: '#ffc107' }}>
           <Left>
             <Icon
               name="menu"
