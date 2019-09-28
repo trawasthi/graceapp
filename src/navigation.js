@@ -21,6 +21,7 @@ import UserAppointment from './userappointment';
 import AddAppointment from './addappointment';
 import Points from './points';
 import Contact from './contact';
+import PteIelts from './pteielts';
 
 const RootStack = createStackNavigator(
   {
@@ -31,6 +32,18 @@ const RootStack = createStackNavigator(
       screen: Education
     },
     Migration: {
+      screen: Migration
+    },
+    Pteielts: {
+      screen: PteIelts
+    },
+    Professional: {
+      screen: Profession
+    },
+    VisaOpt: {
+      screen: Migration
+    },
+    Other: {
       screen: Migration
     },
     Booking: {
