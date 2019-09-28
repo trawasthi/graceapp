@@ -1,5 +1,19 @@
 import React, { Component } from 'react';
-import { Container, Content, Card, CardItem, Body, Icon } from 'native-base';
+import {
+  Container,
+  Content,
+  Card,
+  CardItem,
+  Body,
+  Icon,
+  Text,
+  Right,
+  Header,
+  List,
+  ListItem,
+  Left,
+  View
+} from 'native-base';
 
 export default class Contact extends Component {
   static navigationOptions = {
@@ -9,24 +23,90 @@ export default class Contact extends Component {
 
   render() {
     return (
-      <Container>
-        <Content padder>
-          <Card>
-            <CardItem>
-              <Body>
-                <Icon
-                  name="menu"
-                  size={30}
-                  style={{ marginStart: 10 }}
-                  backgroundColor="#000000"
-                  onPress={() => this.props.navigation.openDrawer()}>
-                  PR point table
-                </Icon>
-              </Body>
-            </CardItem>
-          </Card>
-        </Content>
-      </Container>
+      <View style={{ flex: 1 }}>
+        <Header style={{ backgroundColor: '#009688' }}>
+          <Left>
+            <Icon
+              name="menu"
+              size={30}
+              style={{ marginStart: 10 }}
+              onPress={() => this.props.navigation.openDrawer()}
+            />
+          </Left>
+          <Body>
+            <Text style={{ fontWeight: 'bold' }}>Contact Us</Text>
+          </Body>
+          <Right />
+        </Header>
+        <Container>
+          <Content padder>
+            <Card>
+              <List>
+                <ListItem thumbnail>
+                  <Left>
+                    <Icon name="ios-navigate" />
+                  </Left>
+                  <Body>
+                    <Text>Address</Text>
+                    <Text note numberOfLines={2}>
+                      Level 1, Suite 1.11, 343 Lt. Collins St., Melbourne, VIC - 3000
+                    </Text>
+                  </Body>
+                  <Right />
+                </ListItem>
+                <ListItem thumbnail>
+                  <Left>
+                    <Icon type="MaterialCommunityIcons" name="phone" />
+                  </Left>
+                  <Body>
+                    <Text>Telephone</Text>
+                    <Text note numberOfLines={1}>
+                      (03) 96700017
+                    </Text>
+                  </Body>
+                  <Right />
+                </ListItem>
+                <ListItem thumbnail>
+                  <Left>
+                    <Icon type="Entypo" name="mobile" />
+                  </Left>
+                  <Body>
+                    <Text>Mobile No.</Text>
+                    <Text note numberOfLines={1}>
+                      0420 998 154
+                    </Text>
+                  </Body>
+                  <Right />
+                </ListItem>
+                <ListItem thumbnail>
+                  <Left>
+                    <Icon type="MaterialCommunityIcons" name="email" />
+                  </Left>
+                  <Body>
+                    <Text>Email ID</Text>
+                    <Text note numberOfLines={1}>
+                      admin@gracegroup.com.au
+                    </Text>
+                  </Body>
+                  <Right />
+                </ListItem>
+                <ListItem thumbnail>
+                  <Left>
+                    <Icon type="Foundation" name="web" />
+                  </Left>
+                  <Body>
+                    <Text>Website</Text>
+                    <Text note numberOfLines={1}>
+                      www.gracegroup.com.au
+                    </Text>
+                  </Body>
+                  <Right />
+                </ListItem>
+              </List>
+            </Card>
+          </Content>
+        </Container>
+      </View>
     );
   }
 }
