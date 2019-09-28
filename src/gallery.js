@@ -52,7 +52,17 @@ export default class Gallery extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View>
+        <Modal
+          visible={this.state.modalVisible}
+          transparent
+          onRequestClose={() => this.setState({ modalVisible: false })}>
+          <ImageViewer
+            imageUrls={images}
+            index={this.state.index}
+            onMove={data => console.log(data)}
+          />
+        </Modal>
         <Header style={{ backgroundColor: '#ff9800' }}>
           <Left>
             <Icon
@@ -119,22 +129,6 @@ export default class Gallery extends Component {
             </Card>
           </Content>
         </ScrollView>
-
-        <View
-          style={{
-            padding: 10
-          }}>
-          <Modal
-            visible={this.state.modalVisible}
-            transparent
-            onRequestClose={() => this.setState({ modalVisible: false })}>
-            <ImageViewer
-              imageUrls={images}
-              index={this.state.index}
-              onMove={data => console.log(data)}
-            />
-          </Modal>
-        </View>
       </View>
     );
   }
