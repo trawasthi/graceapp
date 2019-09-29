@@ -69,13 +69,13 @@ class HomeScreen extends React.Component {
         <Card transparent style={[style.child]}>
           <CardItem
             button
-            onPress={() => this.props.navigation.navigate('Migration')}
+            onPress={() => this.props.navigation.navigate('Pteielts')}
             style={{ alignItems: 'center', flex: 1 }}>
             <Thumbnail square source={studyLogo} style={{ width: 135, height: 125 }} />
           </CardItem>
           <CardItem
             button
-            onPress={() => this.props.navigation.navigate('Migration')}
+            onPress={() => this.props.navigation.navigate('Pteielts')}
             footer
             style={{ flexDirection: 'column', justifyContent: 'center' }}>
             <Text>PTE/IELTS</Text>
@@ -85,13 +85,13 @@ class HomeScreen extends React.Component {
         <Card transparent style={[style.child]}>
           <CardItem
             button
-            onPress={() => this.props.navigation.navigate('Migration')}
+            onPress={() => this.props.navigation.navigate('Professional')}
             style={{ alignItems: 'center', flex: 1 }}>
             <Thumbnail square source={professionalLogo} style={{ width: 135, height: 125 }} />
           </CardItem>
           <CardItem
             button
-            onPress={() => this.props.navigation.navigate('Migration')}
+            onPress={() => this.props.navigation.navigate('Professional')}
             footer
             style={{ flexDirection: 'column', justifyContent: 'center' }}>
             <Text>Professional Year</Text>

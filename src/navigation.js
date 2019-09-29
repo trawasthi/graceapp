@@ -22,6 +22,7 @@ import AddAppointment from './addappointment';
 import Points from './points';
 import Contact from './contact';
 import PteIelts from './pteielts';
+import ProfessionalYear from './professionalyear';
 
 const RootStack = createStackNavigator(
   {
@@ -38,7 +39,7 @@ const RootStack = createStackNavigator(
       screen: PteIelts
     },
     Professional: {
-      screen: Profession
+      screen: ProfessionalYear
     },
     VisaOpt: {
       screen: Migration
