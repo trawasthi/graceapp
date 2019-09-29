@@ -101,13 +101,13 @@ class HomeScreen extends React.Component {
         <Card transparent style={[style.child]}>
           <CardItem
             button
-            onPress={() => this.props.navigation.navigate('Migration')}
+            onPress={() => this.props.navigation.navigate('VisaOpt')}
             style={{ alignItems: 'center', flex: 1 }}>
             <Thumbnail square source={visaLogo} style={{ width: 135, height: 125 }} />
           </CardItem>
           <CardItem
             button
-            onPress={() => this.props.navigation.navigate('Migration')}
+            onPress={() => this.props.navigation.navigate('VisaOpt')}
             footer
             style={{ flexDirection: 'column', justifyContent: 'center' }}>
             <Text>Visa Options</Text>
@@ -117,13 +117,13 @@ class HomeScreen extends React.Component {
         <Card transparent style={[style.child]}>
           <CardItem
             button
-            onPress={() => this.props.navigation.navigate('Migration')}
+            onPress={() => this.props.navigation.navigate('Other')}
             style={{ alignItems: 'center', flex: 1 }}>
             <Thumbnail square source={otherLogo} style={{ width: 135, height: 125 }} />
           </CardItem>
           <CardItem
             button
-            onPress={() => this.props.navigation.navigate('Migration')}
+            onPress={() => this.props.navigation.navigate('Other')}
             footer
             style={{ flexDirection: 'column', justifyContent: 'center' }}>
             <Text>Other Services</Text>

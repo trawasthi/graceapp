@@ -81,10 +81,7 @@ export default class Gallery extends Component {
         <ScrollView>
           <Content padder>
             <Card>
-              <TouchableHighlight
-                onPress={() => {
-                  this.setState({ index: 0, modalVisible: true });
-                }}>
+              <TouchableHighlight>
                 <Image source={photo1} style={{ height: 200, width: null, flex: 1 }} />
               </TouchableHighlight>
               <CardItem style={{ justifyContent: 'center' }}>
@@ -92,10 +89,7 @@ export default class Gallery extends Component {
               </CardItem>
             </Card>
             <Card>
-              <TouchableHighlight
-                onPress={() => {
-                  this.setState({ index: 1, modalVisible: true });
-                }}>
+              <TouchableHighlight>
                 <Image source={photo2} style={{ height: 200, width: null, flex: 1 }} />
               </TouchableHighlight>
 
@@ -104,10 +98,7 @@ export default class Gallery extends Component {
               </CardItem>
             </Card>
             <Card>
-              <TouchableHighlight
-                onPress={() => {
-                  this.setState({ index: 2, modalVisible: true });
-                }}>
+              <TouchableHighlight>
                 <Image source={photo3} style={{ height: 200, width: null, flex: 1 }} />
               </TouchableHighlight>
 
@@ -116,10 +107,7 @@ export default class Gallery extends Component {
               </CardItem>
             </Card>
             <Card>
-              <TouchableHighlight
-                onPress={() => {
-                  this.setState({ index: 3, modalVisible: true });
-                }}>
+              <TouchableHighlight>
                 <Image source={photo4} style={{ height: 200, width: null, flex: 1 }} />
               </TouchableHighlight>
 
