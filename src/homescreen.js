@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Button, Text, Card, CardItem, Thumbnail, Icon } from 'native-base';
 import { StyleSheet } from 'react-native';
 import educationLogo from '../assets/education.png';
-import migrationLogo from '../assets/migration.jpg';
+import migrationLogo from '../assets/migration.png';
 import studyLogo from '../assets/study.png';
 import professionalLogo from '../assets/professional.png';
 import visaLogo from '../assets/visa.png';

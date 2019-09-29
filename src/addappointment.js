@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
-import { Container, Content, Text, Form, Label, Item, Input, Button } from 'native-base';
+import { Container, Content, Text, Form, Label, Item, Input, Button, View } from 'native-base';
 import { ActivityIndicator, Alert } from 'react-native';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 import { withFirebase } from './firebase/firebase';
 
 // Main class for adding booking date and time
 class AddAppointmentClass extends Component {
   constructor() {
     super();
-    this.state = { datetime: '' };
+    this.state = { datetime: '', isDateTimePickerVisible: false };
   }
+
+  showDateTimePicker = () => {
+    this.setState({ isDateTimePickerVisible: true });
+  };
+
+  hideDateTimePicker = () => {
+    this.setState({ isDateTimePickerVisible: false });
+  };
+
+  handleDatePicked = date => {
+    const data = date.toLocaleDateString();
+    this.setState({ datetime: data });
+    this.hideDateTimePicker();
+  };
 
   onFormSubmit = () => {
     if (this.state.datetime === '') {
@@ -62,32 +77,49 @@ class AddAppointmentClass extends Component {
 
   render() {
     return (
-      <Container>
-        <Content>
-          <Form>
-            <Item>
-              <Label>Date Time</Label>
-              <Input
-                onChangeText={datetime => this.setState({ datetime })}
-                value={this.state.datetime}
-              />
-            </Item>
-          </Form>
-          <Button
-            style={{
-              textAlign: 'center',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: 16,
-              backgroundColor: '#2196f3'
-            }}
-            primary
-            rounded
-            onPress={this.onFormSubmit}>
-            <Text style={{ fontWeight: 'bold' }}> Add </Text>
-          </Button>
-        </Content>
-      </Container>
+      <View style={{ flex: 1, flexDirection: 'column' }}>
+        <Text>{this.state.datetime}</Text>
+        <Button title="Show DatePicker" onPress={this.showDateTimePicker}>
+          <Text>Choose Date</Text>
+        </Button>
+        <DateTimePicker
+          isVisible={this.state.isDateTimePickerVisible}
+          onConfirm={this.handleDatePicked}
+          onCancel={this.hideDateTimePicker}
+          mode="datetime"
+        />
+      </View>
+      // <Container>
+      //   <Content>
+      //     <DatePickerIOS
+      //       date={new Date()}
+      //       // onDateChange={this.setDate}
+      //     />
+
+      //     <Form>
+      //       <Item>
+      //         <Label>Date Time</Label>
+      //         <Input
+      //           onChangeText={datetime => this.setState({ datetime })}
+      //           value={this.state.datetime}
+      //         />
+      //       </Item>
+      //     </Form>
+      //     <Button
+      //       style={{
+      //         textAlign: 'center',
+      //         justifyContent: 'center',
+      //         alignItems: 'center',
+      //         marginTop: 16,
+      //         backgroundColor: '#2196f3'
+      //       }}
+      //       primary
+      //       rounded
+      //       onPress={this.onFormSubmit}>
+      //       <Text style={{ fontWeight: 'bold' }}> Add </Text>
+      //     </Button>
+      //   </Content>
+      // </Container>
     );
   }
 }
