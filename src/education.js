@@ -1,5 +1,18 @@
 import React, { Component } from 'react';
-import { Container, Content, Card, CardItem, Body, Text, Accordion } from 'native-base';
+import { Linking } from 'react-native';
+import {
+  Container,
+  Content,
+  Card,
+  CardItem,
+  Body,
+  Text,
+  Accordion,
+  List,
+  ListItem,
+  Right,
+  Icon
+} from 'native-base';
 
 const educationDataArray = [
   {
@@ -45,6 +58,20 @@ export default class Education extends Component {
             </CardItem>
           </Card>
           <Accordion padder dataArray={educationDataArray} />
+
+          <Card>
+            <List>
+              <ListItem
+                onPress={() => Linking.openURL('http://www.gracegroup.com.au/education.php')}>
+                <Body>
+                  <Text>More Information</Text>
+                </Body>
+                <Right>
+                  <Icon name="arrow-forward" />
+                </Right>
+              </ListItem>
+            </List>
+          </Card>
         </Content>
       </Container>
     );
