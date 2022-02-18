@@ -5,7 +5,7 @@ import _ from 'lodash';
 import Navigation from './src/navigation';
 import Firebase, { FirebaseContext } from './src/firebase/firebase';
 
-YellowBox.ignoreWarnings(['Setting a timer']);
+ignoreWarnings(['Setting a timer']);
 const _console = _.clone(console);
 console.warn = message => {
   if (message.indexOf('Setting a timer') <= -1) {
