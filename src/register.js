@@ -22,7 +22,7 @@ class RegisterScreen extends React.Component {
         {this.state.errorMessage && <Text style={{ color: 'red' }}>{this.state.errorMessage}</Text>}
         <Item style={{ width: 300 }}>
           <Input
-            placeholder="Email"
+            placeholder="Email address"
             autoCapitalize="none"
             onChangeText={email => this.setState({ email })}
             value={this.state.email}
