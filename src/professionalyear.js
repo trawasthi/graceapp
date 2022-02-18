@@ -15,7 +15,7 @@ import { Linking } from 'react-native';
 
 export default class ProfessionalYear extends Component {
   static navigationOptions = {
-    title: 'Professional Year'
+    title: 'Professional Yr'
   };
 
   render() {
@@ -29,7 +29,7 @@ export default class ProfessionalYear extends Component {
             <CardItem>
               <Body>
                 <Text>
-                  The Professional Year Program (PYear) is a job-readiness program that bridges the
+                  The Professional Year Program is a job-readiness program that bridges the
                   gap between full-time study and professional employment in Australia.{'\n'}
                 </Text>
                 <Text>
