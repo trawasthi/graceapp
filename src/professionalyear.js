@@ -35,8 +35,7 @@ export default class ProfessionalYear extends Component {
                 <Text>
                   PROFESSIONAL YEAR PROGRAM ACS's PYear Program gives international ICT graduates
                   from Australian teritary providers the practical job skills and training needed to
-                  enhance their career prospects. A practical pathway from university to employment,
-                  PYear ensures that graduates are job-ready.{'\n'}
+                  enhance their career prospects.{'\n'}
                 </Text>
 
                 <Text>
